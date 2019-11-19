@@ -1,5 +1,4 @@
 # Marcador-de-Foda-se
 Marcador do jogo foda-se
 
-#Começo
-O objetivo é se tornar um marcador completo
+O objetivo é se tornar um marcador completo, mas o projeto está apenas no começo
