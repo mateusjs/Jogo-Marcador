@@ -11,28 +11,51 @@ class _MarcadorState extends State<Marcador> {
   TextEditingController _textFieldController = TextEditingController();
   List<Jogador> teste = new List();
 
+  mesa() {
+    return Container(
+      child: Stack(
+        alignment: Alignment.center,
+        children: <Widget>[
+          Container(
+            child: Center(
+              child: RotatedBox(
+                quarterTurns: 1,
+                child: Image.network('http://www.buildyourownpokertables.com' +
+                    '/images/stories/ovalpokertable.png'),
+              ),
+            ),
+          ),
+          Container(
+            child: FractionalTranslation(
+              translation: Offset(0.0, -4.5),
+              child: Image.network('https://icon-library.net/images/' +
+                  'person-icon-png-transparent/person-icon-png-transparent-5.jpg',
+                  width: 40,),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text("teste"),
       ),
-      body: fodase(),
+      body: mesa(),
       floatingActionButton: SpeedDial(
           marginRight: 18,
           marginBottom: 20,
           animatedIcon: AnimatedIcons.menu_close,
           animatedIconTheme: IconThemeData(size: 22.0),
-          // this is ignored if animatedIcon is non null
-          // child: Icon(Icons.add),
-          // If true user is forced to close dial manually
-          // by tapping main button and overlay is not rendered.
           closeManually: false,
           curve: Curves.bounceIn,
           overlayColor: Colors.black,
           overlayOpacity: 0.5,
-          backgroundColor: Colors.white,
-          foregroundColor: Colors.black,
+          backgroundColor: Theme.of(context).cardColor,
+          foregroundColor: Theme.of(context).accentColor,
           elevation: 8.0,
           shape: CircleBorder(),
           children: [
@@ -40,25 +63,35 @@ class _MarcadorState extends State<Marcador> {
                 child: Icon(Icons.accessibility),
                 backgroundColor: Colors.red,
                 label: 'Add Jogador',
-                labelStyle: TextStyle(fontSize: 18.0),
-                onTap: () {}),
+                labelStyle: TextStyle(fontSize: 18.0, color: Colors.black),
+                onTap: () => _displayDialog(context)),
             SpeedDialChild(
               child: Icon(Icons.brush),
               backgroundColor: Colors.blue,
               label: 'Zerar o Jogo',
-              labelStyle: TextStyle(fontSize: 18.0),
-              onTap: () {},
+              labelStyle: TextStyle(fontSize: 18.0, color: Colors.black),
+              onTap: () {
+                teste.forEach((f) => zeraLista(f));
+
+                setState(() {});
+              },
             )
           ]),
+      bottomNavigationBar: BottomAppBar(
+        child: IconButton(
+          icon: Icon(Icons.table_chart),
+          onPressed: () {
+            print("OIEEEE");
+          },
+        ),
+      ),
     );
   }
 
-// FloatingActionButton(
-//         child: Icon(Icons.add),
-//         onPressed: () {
-//           _displayDialog(context);
-//         },
-//       )
+  zeraLista(Jogador jogador) {
+    jogador.pontos = 0;
+    jogador.emJogo = true;
+  }
 
   fodase() {
     return ListView.separated(
@@ -82,8 +115,8 @@ class _MarcadorState extends State<Marcador> {
                 children: <Widget>[
                   ButtonTheme(
                     minWidth: 10,
-                    child: RaisedButton(
-                      child: Icon(Icons.remove_circle_outline),
+                    child: IconButton(
+                      icon: Icon(Icons.remove_circle_outline),
                       onPressed: () {
                         if (teste[index].pontos > 4) {
                           teste[index].emJogo = true;
@@ -101,8 +134,8 @@ class _MarcadorState extends State<Marcador> {
                   ),
                   ButtonTheme(
                     minWidth: 10,
-                    child: RaisedButton(
-                      child: Icon(Icons.control_point),
+                    child: IconButton(
+                      icon: Icon(Icons.control_point),
                       onPressed: () {
                         if (teste[index].pontos > 4) {
                           teste[index].emJogo = false;
