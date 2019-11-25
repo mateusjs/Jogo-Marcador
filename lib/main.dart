@@ -9,9 +9,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Marcador de Foda-se',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
+      theme:  ThemeData.dark(),
       home: Marcador()
     );
   }

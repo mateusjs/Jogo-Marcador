@@ -21,13 +21,13 @@ class _MarcadorState extends State<Marcador> {
               child: RotatedBox(
                 quarterTurns: 1,
                 child: Image.network('http://www.buildyourownpokertables.com' +
-                    '/images/stories/ovalpokertable.png'),
+                    '/images/stories/ovalpokertable.png', scale: 0.8),
               ),
             ),
           ),
           Container(
             child: FractionalTranslation(
-              translation: Offset(0.0, -4.5),
+              translation: Offset(0, 5.3),
               child: Image.network('https://icon-library.net/images/' +
                   'person-icon-png-transparent/person-icon-png-transparent-5.jpg',
                   width: 40,),
